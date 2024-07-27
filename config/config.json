@@ -1,0 +1,55 @@
+{
+    "test": {
+        "username": "admin_db_ufa",
+        "password": "9bY2?w07h",
+        "database": "admin_db_ufa",
+        "host": "45.144.167.166",
+        "port": 3306,
+        "dialect": "mysql",
+        "logging": false,
+        "poll": {
+            "max": 5,
+            "min": 0,
+            "idle": 10000
+        }
+    },
+    "development": {
+        "username": "admin_db_ufa",
+        "password": "9bY2?w07h",
+        "database": "admin_db_ufa",
+        "host": "45.144.167.166",
+        "port": 3306,
+        "dialect": "mysql",
+        "timezone": "+00:00",
+        "dialectOptions":{
+           
+          },
+        "logging": true,
+        "poll": {
+            "max": 5,
+            "min": 0,
+            "idle": 10000
+        }
+    },
+    "production": {
+        "username": "admin_db_ufa",
+        "password": "9bY2?w07h",
+        "database": "admin_db_ufa", 
+        "host": "45.144.167.166",
+        "port": 3306,
+        "dialect": "mysql",
+        "timezone": "+07:00",
+        "dialectOptions":{
+           
+          },
+        "logging": false,
+        "poll": {
+            "max": 5,
+            "min": 0,
+            "idle": 10000
+        }
+    },
+    
+    "jwt_encryption": "testingApp",
+    "jwt_expiration": "365d"
+}
