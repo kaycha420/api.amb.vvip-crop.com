@@ -1,0 +1,53 @@
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class ClanMember extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
+  ClanMember.init({
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: { model: "users", key: "id" },
+      onDelete: "CASCADE",
+      allowNull: false,
+    },
+    clan_id: {
+      type: DataTypes.INTEGER,
+      references: { model: "clans", key: "id" },
+      onDelete: "CASCADE",
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    application_status: {
+      type: DataTypes.ENUM('Pending', 'Accepted', 'Decline'),
+      allowNull: false,
+      defaultValue: 'Pending'
+    },
+    deleted_at: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+  }, {
+    sequelize,
+    modelName: 'ClanMember',
+    tableName: 'clan_members',
+    deletedAt: 'deleted_at',
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+    paranoid: true, //use for soft delete with using deleted_at
+    underscored: true //making underscored colomn as deletedAt to deleted_at
+  });
+  return ClanMember;
+};

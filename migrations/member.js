@@ -16,10 +16,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      password2: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
       line: {
         type: Sequelize.STRING,
         allowNull: true,
@@ -44,30 +40,34 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      first_dep: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
       bank: {
         type: Sequelize.STRING,
         allowNull: true,
+        references: { model: "bank", key: "id" },
+        onDelete: "CASCADE",
       },
-      bankNameTh: {
-        type: Sequelize.STRING,
+      bank_id: {
+        type: Sequelize.INTEGER,
         allowNull: true,
+        references: { model: "bank", key: "id" },
+        onDelete: "CASCADE",
       },
       name: {
         type: Sequelize.STRING,
         allowNull: true,
       },
       status: {
-        type: Sequelize.INTEGER, 
+        type: Sequelize.INTEGER,
         allowNull: true,
       },
       aff: {
         type: Sequelize.STRING,
+
+        references: { model: "member", key: "id" },
+        onDelete: "CASCADE",
         allowNull: true,
       },
+
       ip: {
         type: Sequelize.STRING,
         allowNull: true,
@@ -77,8 +77,10 @@ module.exports = {
         allowNull: true,
       },
       promotion_id: {
-        defaultValue: 0,
         type: Sequelize.INTEGER,
+        references: { model: "promotion", key: "id" },
+        onDelete: "CASCADE",
+
         allowNull: true,
       },
       backlist: {
@@ -110,63 +112,55 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-
-      status_pay: {
-        type: Sequelize.DOUBLE,
-        defaultValue: 0,
-        allowNull: true,
-      },
       bonus_aff: {
         type: Sequelize.DOUBLE,
         allowNull: true,
       },
       bonus_wl: {
         type: Sequelize.DOUBLE,
-        defaultValue: 0,
+        allowNull: true,
+      },
+      bonus_wl: {
+        type: Sequelize.DOUBLE,
+        allowNull: true,
+      },
+      bonus_wl: {
+        type: Sequelize.DOUBLE,
         allowNull: true,
       },
       wl_status: {
-        type: Sequelize.DOUBLE,
-        defaultValue: 0,
+        type: Sequelize.INTEGER,
         allowNull: true,
       },
       avata_img: {
         type: Sequelize.STRING,
-        defaultValue: "avatar.png",
         allowNull: true,
       },
       partner: {
         type: Sequelize.STRING,
-
         allowNull: true,
       },
-      create_by: {
-        type: Sequelize.STRING,
-
-        allowNull: true,
-      },
-      edit_by: {
-        type: Sequelize.STRING,
-
-        allowNull: true,
-      },
-      date_c: {
+      status_pay: {
         type: Sequelize.INTEGER,
-        defaultValue: 0,
+        allowNull: true,
+      },
+      current_Tranid_id: {
+        type: Sequelize.INTEGER,
+        references: { model: "transaction", key: "id" },
+        onDelete: "CASCADE",
         allowNull: true,
       },
       deleted_at: {
         type: Sequelize.DATE,
         allowNull: true,
       },
-      created_at: {
-        allowNull: true,
-
-        type: Sequelize.DATE,
-      },
       updated_at: {
-        allowNull: true,
         type: Sequelize.DATE,
+        allowNull: true,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: true,
       },
     });
   },

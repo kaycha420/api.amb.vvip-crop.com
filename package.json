@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kaycha420/api_strartup.git"
+    "url": "git+https://github.com/maxloveyou2/api_strartup.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kaycha420/api_strartup/issues"
+    "url": "https://github.com/maxloveyou2/api_strartup/issues"
   },
-  "homepage": "https://github.com/kaycha420/api_strartup#readme",
+  "homepage": "https://github.com/maxloveyou2/api_strartup#readme",
   "dependencies": {
     "@sendgrid/mail": "^7.7.0",
     "@types/set-tz": "^0.2.0",
