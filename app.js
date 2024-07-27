@@ -43,11 +43,11 @@ app.set ( "view engine", "ejs" );
 
 
 
-app.use("/api/v4/setting", settingRouter);
-app.use("/api/v4/settingnoauth", setusettingRouter);
-app.use("/api/v4/user", userRouter);
-app.use("/api/v4/admin", adminRouter);
-app.use("/api/v4/bankall", bankallRouter);
+app.use("/api/v5/setting", settingRouter);
+app.use("/api/v5/settingnoauth", setusettingRouter);
+app.use("/api/v5/user", userRouter);
+app.use("/api/v5/admin", adminRouter);
+app.use("/api/v5/bankall", bankallRouter);
 
 
 
@@ -65,7 +65,7 @@ app.use("/api/v4/bankall", bankallRouter);
 
 app.get("/", (_req, res) => {
 
-  res.json({ message: "Welcome to API UFA" });
+  res.json({ message: "Welcome to API AMB" });
 });
   
 

@@ -41,7 +41,7 @@ module.exports = {
         allowNull: true,
       },
       bank: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: true,
         references: { model: "bank", key: "id" },
         onDelete: "CASCADE",
@@ -63,8 +63,8 @@ module.exports = {
       aff: {
         type: Sequelize.STRING,
 
-        references: { model: "member", key: "id" },
-        onDelete: "CASCADE",
+       // references: { model: "member", key: "id" },
+       // onDelete: "CASCADE",
         allowNull: true,
       },
 
