@@ -16,6 +16,8 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: true
             },
+
+            
             url_play: {
                 type: Sequelize.STRING,
                 allowNull: true
