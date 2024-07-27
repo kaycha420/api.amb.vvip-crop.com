@@ -1,6 +1,10 @@
 "use strict";
 const { Model } = require("sequelize");
 
+const bcrypt = require("bcrypt");
+const bcrypt_p = require("bcrypt-promise");
+const { TE, to } = require("../services/util.service");
+
 module.exports = (sequelize, DataTypes) => {
   class Member extends Model {
     /**
@@ -19,10 +23,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
       },
       password: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      password2: {
         type: DataTypes.STRING,
         allowNull: true,
       },
@@ -50,15 +50,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      first_dep: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
       bank: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      bankNameTh: {
         type: DataTypes.STRING,
         allowNull: true,
       },
@@ -153,18 +145,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
-
-      // ticket: {
-      //   type: DataTypes.INTEGER,
-      //   allowNull: true,
-      // },
-
-      create_by: {
-        type: DataTypes.STRING,
+      
+      ticket: {
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
-      edit_by: {
-        type: DataTypes.STRING,
+      
+      point: {
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
       deleted_at: {
@@ -189,7 +177,7 @@ module.exports = (sequelize, DataTypes) => {
       updatedAt: "updated_at",
       //paranoid: true, //use for soft delete with using deleted_at
       // underscored: true //making underscored colomn as deletedAt to deleted_at
-    }
+    },
   );
 
   Member.prototype.comparePassword = async function (pw) {
