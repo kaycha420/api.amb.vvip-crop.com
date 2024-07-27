@@ -1,8 +1,8 @@
 {
     "test": {
-        "username": "admin_db_ufa",
-        "password": "9bY2?w07h",
-        "database": "admin_db_ufa",
+        "username": "db_amb",
+        "password": "9Ziw8v8!1",
+        "database": "db_amb",
         "host": "45.144.167.166",
         "port": 3306,
         "dialect": "mysql",
@@ -14,9 +14,9 @@
         }
     },
     "development": {
-        "username": "admin_db_ufa",
-        "password": "9bY2?w07h",
-        "database": "admin_db_ufa",
+        "username": "db_amb",
+        "password": "9Ziw8v8!1",
+        "database": "db_amb",
         "host": "45.144.167.166",
         "port": 3306,
         "dialect": "mysql",
@@ -32,9 +32,9 @@
         }
     },
     "production": {
-        "username": "admin_db_ufa",
-        "password": "9bY2?w07h",
-        "database": "admin_db_ufa", 
+        "username": "db_amb",
+        "password": "9Ziw8v8!1",
+        "database": "db_amb", 
         "host": "45.144.167.166",
         "port": 3306,
         "dialect": "mysql",
