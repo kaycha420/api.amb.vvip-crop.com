@@ -6,7 +6,7 @@ const { TE, to } = require("../services/util.service");
 
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-    class Admin extends Model {
+    class Admins extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of DataTypes lifecycle.
@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
             // define association here
         }
     }
-    Admin.init({
+    Admins.init({
         username: {
             type: DataTypes.STRING,
             allowNull: true
@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
         auth_token: DataTypes.TEXT,
         
         added_by: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: true
         },
         level_user: {
@@ -64,7 +64,7 @@ module.exports = (sequelize, DataTypes) => {
         
         status: {
             allowNull: true,
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             defaultValue: 1,
         },
         deleted_at: {
@@ -81,12 +81,12 @@ module.exports = (sequelize, DataTypes) => {
         }
     }, {
         sequelize,
-        modelName: "Admin",
-        tableName: "admin",
+        modelName: "Admins",
+        tableName: "admins",
     },);
 
 
-    Admin.prototype.comparePassword = async function (pw) {
+    Admins.prototype.comparePassword = async function (pw) {
         let err, pass;
         if (!this.password) TE("password not set");
     
@@ -98,5 +98,5 @@ module.exports = (sequelize, DataTypes) => {
         return this;
       };
 
-    return Admin;
+    return Admins;
 };

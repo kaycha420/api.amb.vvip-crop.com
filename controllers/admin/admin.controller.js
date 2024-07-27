@@ -1,6 +1,6 @@
 var {
     Member,
-    Admin
+    Admins
     
   } = require("../../models");
   //const Api_bet = require("../../apiall/apibetfix/apibetfix");
@@ -230,10 +230,8 @@ const loginadmin = async function (req, res) {
      let err, admin, create;
   
     [err, admin] = await to(
-        Admin.findOne({
-        where: {
-          username: body.username,
-        },
+        Admins.findAll({
+       
       })
     );
     console.log(admin);
@@ -243,7 +241,7 @@ const loginadmin = async function (req, res) {
         res,
         {
           msg: "มี USERNAME นี้แล้ว ในระบบ.",
-          status_code: 104,
+          error: "error . Admin",
         },
         200
       );
@@ -253,7 +251,7 @@ const loginadmin = async function (req, res) {
      let comparepass = await createpasshes(body.password);
   
     [err, create] = await to(
-      Admin.create({
+        Admins.create({
         username: body.username,
         password: comparepass,
         level_user: body.level_user,
