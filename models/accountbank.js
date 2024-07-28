@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Account_bank extends Model {
+  class Accountbank extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of DataTypes lifecycle.
@@ -11,138 +11,132 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Account_bank.init(
+  Accountbank.init(
     {
       accnum: {
         type: DataTypes.STRING,
-        allowNull: true,
+       
+        allowNull: true
       },
-      name: {
+      name_accnum: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       },
       username: {
         type: DataTypes.TEXT,
-        allowNull: true,
+        allowNull: true
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       },
       status_scb: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: true
       },
       from_b: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
+      },
+      bank_id: {
+        type: DataTypes.INTEGER,
+        references: { model: "bank", key: "id" },
+        onDelete: "CASCADE",
+        allowNull: true
+      },
+      setting_id: {
+        type: DataTypes.INTEGER,
+        references: { model: "setting", key: "id" },
+        onDelete: "CASCADE",
+        allowNull: true
       },
       level: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       },
       option_b: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       },
       time_crul: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       },
       tobank_accnum: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       },
       tobank_monney: {
         type: DataTypes.FLOAT,
-        allowNull: true,
+        allowNull: true
       },
       status: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: true
       },
       text_data: {
         type: DataTypes.TEXT,
-        allowNull: true,
+        allowNull: true
       },
       limit_wit: {
         type: DataTypes.FLOAT,
-        allowNull: true,
+        allowNull: true
       },
       limit_d: {
         type: DataTypes.FLOAT,
-        allowNull: true,
+        allowNull: true
       },
       tobank_bank: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       },
       tobank_minmonny: {
         type: DataTypes.FLOAT,
-        allowNull: true,
+        allowNull: true
       },
       tobank_stust: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: true
       },
       baba: {
         type: DataTypes.FLOAT,
-        allowNull: true,
+        allowNull: true
       },
       status_connact: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: true
       },
-      from: {
+      from_accnum: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       },
       name_bank: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       },
       autowit_status: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: true
       },
       autowit_minmony: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       },
-      autowit_maxmonny: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      qr_stust: {
+      status_run: {
         type: DataTypes.INTEGER,
-        defaultValue: 0,
-        allowNull: true,
+        allowNull: true
       },
-      phone_number: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      deleted_at: {
-        allowNull: true,
-        type: DataTypes.DATE,
-      },
-      created_at: {
-        allowNull: true,
-        type: DataTypes.DATE,
-      },
-      updated_at: {
-        allowNull: true,
-        type: DataTypes.DATE,
-      },
+   
     },
     {
       sequelize,
-      modelName: "Account_bank",
-      tableName: "account_bank",
-      // deletedAt: 'deleted_at',
-      // createdAt: "created_at",
-      // updatedAt: "updated_at",
+      modelName: "Accountbank",
+      tableName: "accountbank",
+      deletedAt: 'deleted_at',
+      createdAt: "created_at",
+      updatedAt: "updated_at",
     },
   );
-  return Account_bank;
+  return Accountbank;
 };
+  

@@ -38,11 +38,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.ENUM(["member", "admin"]),
         allowNull: true,
       },
-      user_ufa: {
+      user_agent: {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      pass_ufa: {
+      pass_agent: {
         type: DataTypes.STRING,
         allowNull: true,
       },
@@ -149,10 +149,13 @@ module.exports = (sequelize, DataTypes) => {
       ticket: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        defaultValue: 0,
+
       },
       
       point: {
         type: DataTypes.INTEGER,
+        defaultValue: 0,
         allowNull: true,
       },
       deleted_at: {

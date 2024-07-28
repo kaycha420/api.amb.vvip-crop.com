@@ -28,11 +28,21 @@ module.exports = {
         type: Sequelize.ENUM(["member", "admin"]),
         allowNull: true,
       },
-      user_ufa: {
+      user_agent: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      pass_ufa: {
+      ticket: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: true,
+      },
+      point: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: true,
+      },
+      pass_agent: {
         type: Sequelize.STRING,
         allowNull: true,
       },
@@ -100,6 +110,7 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
+      
       ref: {
         type: Sequelize.INTEGER,
         allowNull: true,
@@ -146,7 +157,7 @@ module.exports = {
       },
       current_Tranid_id: {
         type: Sequelize.INTEGER,
-        references: { model: "transaction", key: "id" },
+        references: { model: "transactions", key: "id" },
         onDelete: "CASCADE",
         allowNull: true,
       },

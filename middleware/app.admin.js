@@ -1,4 +1,4 @@
-const { User,Adminlogin } = require('../models');
+const { User,Admins } = require('../models');
 const { ReE } = require('../services/util.service');
 const { Op } = require('sequelize');
 
@@ -7,7 +7,7 @@ let checkUser = async function (req, res, next) {
     // console.log(req.user)
 
     let user_id = req.user.id;
-    let user = await Adminlogin.findOne({
+    let user = await Admins.findOne({
         where: {
             [Op.and]: [
                 { id: user_id },

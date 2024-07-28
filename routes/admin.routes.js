@@ -9,7 +9,14 @@ const userMidd = require("../middleware/app.admin");
 require("../middleware/passport_admin")(passport);
 
 addminRouter.post("/loginadmin", adminControllers.loginadmin);
-addminRouter.post("/cerate_useradmin", adminControllers.cerate_useradmin);
+addminRouter.post("/cerate_useradmin", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.cerate_useradmin);
+addminRouter.get("/getdata_admin", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getdata_admin);
+addminRouter.post("/edit_useradmin", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.edit_useradmin);
+addminRouter.get("/getdatasetting", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getdatasetting);
+addminRouter.get("/getdata_memberall", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getdata_memberall);
+addminRouter.post("/getdamember_detail", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getdamember_detail);
+addminRouter.post("/add_bankdeposit", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.add_bankdeposit);
+addminRouter.get("/getdata_bankdeposit", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getdata_bankdeposit);
 
 
 //addminRouter.get("/getAllAdmin",passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getAllAdmin);

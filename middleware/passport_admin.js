@@ -1,5 +1,5 @@
 const { ExtractJwt, Strategy } = require('passport-jwt');
-const { User, Adminlogin,Member } = require('../models');
+const { User, Admins,Member } = require('../models');
 const CONFIG = require('../config/config.json');
 const { to } = require('../services/util.service');
 
@@ -19,7 +19,7 @@ module.exports = function (passport) {
        // console.log(jwt_payload)
         let err, user, admin;
         if (jwt_payload.user_type == 'admin') {
-            [err, admin] = await to(Adminlogin.findOne({ where: { id: jwt_payload.user_id, email: jwt_payload.email } }));
+            [err, admin] = await to(Admins.findOne({ where: { id: jwt_payload.user_id, username: jwt_payload.username } }));
         } else {
             [err, user] = await to(Member.findOne({ where: { id: jwt_payload.user_id, username: jwt_payload.username } }));
         }
