@@ -255,7 +255,8 @@ const add_bankdeposit = async function (req, res) {
 };
 //getdata_bankdeposit
 const getdata_bankdeposit = async function (req, res) {
-  const body = req.body;
+  const body
+  = req.body;
   let data = await Accountbank.findAll();
   console.log(body);
   return ReS(res, {
