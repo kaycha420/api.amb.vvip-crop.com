@@ -9,6 +9,7 @@ const userMidd = require("../middleware/app.admin");
 require("../middleware/passport_admin")(passport);
 
 addminRouter.post("/loginadmin", adminControllers.loginadmin);
+addminRouter.get("/chacklogin", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.chacklogin);
 addminRouter.post("/cerate_useradmin", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.cerate_useradmin);
 addminRouter.get("/getdata_admin", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getdata_admin);
 addminRouter.post("/edit_useradmin", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.edit_useradmin);

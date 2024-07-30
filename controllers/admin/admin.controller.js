@@ -20,6 +20,7 @@ const config = require("../../config/app.json")[app["env"]];
 const Notification = require("../../helpers/notification.helper.js");
 var moment = require("moment");
 const { where } = require("sequelize");
+const { orderBy } = require("lodash");
 require("moment/locale/th");
 
 async function createpasshes(pw) {
@@ -277,8 +278,6 @@ const getdata_memberall = async function (req, res) {
   });
 };
 
-
-
 async function getdata_transactions_byid(id,type){
 
  // console.log(id)
@@ -295,6 +294,7 @@ async function getdata_transactions_byid(id,type){
         },
       },
     ],
+    order: [["id", "DESC"]],
     where : {
       user_id:id,
       type_option:type
@@ -325,6 +325,8 @@ const getdamember_detail = async function (req, res) {
         },
       },
     ],
+    order: [["id", "DESC"]],
+
     where: {
       id: body.id,
     },
@@ -613,16 +615,20 @@ const addcredit = async function (req, res) {
   }
   let data2 = resd.data;
 
-  let create_to = await Transaction.create({
+  let create_to = await Transaction.create(
+    {
     user_id: body.user_id,
-    amount: data2.data.afterCredit,
+    amount: body.credit,
     ref: data2.data.refId,
     c_before: data2.data.beforeCredit,
     c_after: data2.data.afterCredit,
     status: "success",
     type_option: "ฝาก",
     addby: req.user.username,
-  });
+    add_from: 'admin'
+  }
+
+);
 
 
 
@@ -688,6 +694,7 @@ const getTransactions = async function (req, res) {
         },
       },
     ],
+    order: [["id", "DESC"]],
   });
   return ReS(res, {
     data: getdata,
@@ -696,6 +703,17 @@ const getTransactions = async function (req, res) {
     msg: "Success",
   });
 };
+//checkloginadmin
+const chacklogin = async function (req, res) { 
+  if (req.user) {
+    return ReS(res, {
+      code: 0,
+      data: req.user,
+      error: "No error",
+      msg: "Success",
+    });
+  }
+}
 function randomString(len, charSet) {
   charSet = charSet || "abcdefghijklmnopqrstuvwxyz0123456789";
   var randomString = "";
@@ -723,4 +741,5 @@ module.exports = {
   addcredit,
   delCredit,
   getTransactions,
+  chacklogin
 };

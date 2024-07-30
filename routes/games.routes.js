@@ -13,7 +13,7 @@ gamesRouter.get("/providerPrefixLists", passport.authenticate("jwt", { session: 
 gamesRouter.post("/AddFavouritesGamesList", passport.authenticate("jwt", { session: false }), userMidd.checkUser, gamesControllers.AddFavouritesGamesLists);
 gamesRouter.post("/delFavourite", passport.authenticate("jwt", { session: false }), userMidd.checkUser, gamesControllers.delFavourite);
 gamesRouter.get("/getFavourites", passport.authenticate("jwt", { session: false }), userMidd.checkUser, gamesControllers.getFavourite);
-gamesRouter.post("/gameList", passport.authenticate("jwt", { session: false }), userMidd.checkUser, gamesControllers.gameLists);
+gamesRouter.post("/gameList",  gamesControllers.gameLists);
 
 // getRecently  เกมที่เล่นล่าสุด
 gamesRouter.get("/getRecently", passport.authenticate("jwt", { session: false }), userMidd.checkUser, gamesControllers.getRecently);
