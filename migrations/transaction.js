@@ -9,8 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       user_id: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: true,
+        references: { model: "member", key: "id" },
+        onDelete: "CASCADE",
       },
       match_id: {
         type: Sequelize.INTEGER,
@@ -98,6 +100,10 @@ module.exports = {
       },
       nodere: {
         type: Sequelize.TEXT,
+        allowNull: true,
+      },
+      addby: {
+        type: Sequelize.STRING,
         allowNull: true,
       },
       date_new1: {

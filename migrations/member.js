@@ -157,7 +157,7 @@ module.exports = {
       },
       current_Tranid_id: {
         type: Sequelize.INTEGER,
-        references: { model: "transactions", key: "id" },
+        references: { model: "transaction", key: "user_id" },
         onDelete: "CASCADE",
         allowNull: true,
       },

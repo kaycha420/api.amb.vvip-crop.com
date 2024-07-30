@@ -53,6 +53,14 @@ module.exports = (sequelize, DataTypes) => {
       bank: {
         type: DataTypes.STRING,
         allowNull: true,
+        references: { model: "bank", key: "id" },
+        onDelete: "CASCADE",
+      },
+      bank_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: { model: "bank", key: "id" },
+        onDelete: "CASCADE",
       },
       name: {
         type: DataTypes.STRING,
@@ -64,8 +72,12 @@ module.exports = (sequelize, DataTypes) => {
       },
       aff: {
         type: DataTypes.STRING,
+
+        references: { model: "member", key: "id" },
+        onDelete: "CASCADE",
         allowNull: true,
       },
+
       ip: {
         type: DataTypes.STRING,
         allowNull: true,
@@ -76,7 +88,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       promotion_id: {
         type: DataTypes.INTEGER,
-        defaultValue: 0,
+        references: { model: "promotion", key: "id" },
+        onDelete: "CASCADE",
+
         allowNull: true,
       },
       backlist: {
@@ -108,24 +122,16 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      partner: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-
       bonus_aff: {
         type: DataTypes.DOUBLE,
-        defaultValue: 0,
         allowNull: true,
       },
       bonus_wl: {
         type: DataTypes.DOUBLE,
-        defaultValue: 0,
         allowNull: true,
       },
       bonus_wl: {
         type: DataTypes.DOUBLE,
-        defaultValue: 0,
         allowNull: true,
       },
       bonus_wl: {
@@ -140,24 +146,20 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-
+      partner: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       status_pay: {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
-      
-      ticket: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        defaultValue: 0,
-
-      },
-      
-      point: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
-        allowNull: true,
-      },
+      // current_Tranid_id: {
+      //   type: DataTypes.INTEGER,
+      //  references: { model: "transaction", key: "user_id" },
+      //  onDelete: "CASCADE",
+      //   allowNull: true,
+      // },
       deleted_at: {
         type: DataTypes.DATE,
         allowNull: true,
@@ -166,7 +168,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: true,
       },
-      created_at: {
+      created_at: { 
         type: DataTypes.DATE,
         allowNull: true,
       },

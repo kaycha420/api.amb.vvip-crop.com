@@ -17,7 +17,14 @@ addminRouter.get("/getdata_memberall", passport.authenticate("jwt", { session: f
 addminRouter.post("/getdamember_detail", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getdamember_detail);
 addminRouter.post("/add_bankdeposit", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.add_bankdeposit);
 addminRouter.get("/getdata_bankdeposit", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getdata_bankdeposit);
+addminRouter.post("/addmember_byadmin", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.addmember_byadmin);
+addminRouter.get("/getAgentCredit", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getAgentCredit);
+addminRouter.get("/getTransactions", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getTransactions);
+addminRouter.post("/addcredit", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.addcredit);
+addminRouter.post("/delCredit", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.delCredit);
 
+// 
+addminRouter.get("/getdatabank_code",  adminControllers.getdatabank_code);
 
 //addminRouter.get("/getAllAdmin",passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getAllAdmin);
 

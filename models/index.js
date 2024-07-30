@@ -50,26 +50,6 @@ Object.keys(db).forEach((modelName) => {
 
 db['Admin'].belongsTo(db['AdminRole'], { as: 'AdminRole', foreignKey: 'role_id', sourceKey: 'id' });
 
-db["User"].hasOne(db["Follower"], { as: "Follower", foreignKey: "from_user_id", });
-db['User'].belongsTo(db['Country'], {foreignKey : 'country_id'});
-db['User'].belongsTo(db['Province'], {foreignKey : 'province_id'});
-db['User'].belongsTo(db['District'], {foreignKey : 'district_id'});
-db['User'].belongsTo(db['SubDistrict'], {foreignKey : 'sub_district_id'});
-db['User'].hasOne(db['VerificationOtp'], { foreignKey: 'user_id', as: 'VerificationOtp' });
-db['User'].hasMany(db['Post'], { foreignKey: 'user_id', as: 'Post' });
-// db['User'].hasOne(db['Friendship'], {foreignKey : 'from_user_id', as : 'Friendship'});
-db['User'].hasMany(db['Friendship'], { foreignKey: 'to_user_id', as: 'toFriend' });
-db['User'].hasMany(db['Friendship'], { foreignKey: 'from_user_id', as: 'fromFriend' });
-db['Game'].hasOne(db['FavouriteGame'], { foreignKey: 'game_id', as: 'FavouriteGame' });
-db['FaqCategory'].hasMany(db['Faq'], { foreignKey: 'faq_category_id', as: 'Faq' });
-db['Post'].hasMany(db['PostAttachment'], { foreignKey: 'post_id', as: 'PostAttachment' });
-db['Post'].hasOne(db['Like'], { foreignKey: 'post_id', as: 'Like' });
-db['Post'].hasMany(db['Like'], { foreignKey: 'post_id', as: 'LikeData' });
-db['Post'].hasMany(db['Comment'], { foreignKey: 'post_id', as: 'Comment' });
-db['Post'].hasMany(db['TaggedUser'], { foreignKey: 'post_id', as: 'TagUser' });
-// db['User'].hasOne(db['TaggedUser'], { foreignKey: 'tagged_user_id', as: 'User' });
-db['TaggedUser'].belongsTo(db['User'], {foreignKey : 'tagged_user_id'});
-
 db['User'].hasMany(db['ContactSupport'], { foreignKey: 'user_id', as: 'userContact' });
 db['ContactReason'].hasMany(db['ContactSupport'], { foreignKey: 'contact_reason_id', as: 'ContactReason' });
 // db['Friendship'].hasOne(db['User'], {foreignKey : 'id', as : 'User'});
@@ -82,6 +62,24 @@ db['UserNotificationSetting'].belongsTo(db['MasterNotification'], {foreignKey : 
 db["Trophy"].hasOne(db["UserTrophy"], { as: "UserTrophy", foreignKey: "trophy_id", });
 
 db["Badge"].hasOne(db["UserBadge"], { as: "UserBadge", foreignKey: "badge_id", });
+
+db["Member"].belongsTo(db["Bank"], { as: "Bank", foreignKey: "bank_id", });
+//db["Member"].belongsTo(db["Bank"], { as: "Bank", foreignKey: "bank_id", });
+
+//db["Member"].hasOne(db["Transaction"], { foreignKey: "current_Tranid_id",});
+
+db['History_tran'].belongsTo(db['Account_bank'], {foreignKey : 'accnum_from'})
+
+
+
+db["Account_bank"].belongsTo(db["Bank"], { as: "Bank", foreignKey: "bank_id", });
+
+
+db["Transaction"].belongsTo(db["Member"], { as: "Member", foreignKey: "user_id", });
+
+
+db["History_tran"].belongsTo(db["Bank"], { foreignKey: "bank_to_id", });
+db["History_tran"].belongsTo(db["Bank"], { as: "Banks",foreignKey: "bank_from_id", });
 
 // start RequestToPlay table associates
 // db['User'].hasMany(db['RequestToPlay'], { foreignKey: 'user_id', as: 'userRequest' });
@@ -129,6 +127,9 @@ db['Comment'].belongsTo(db['User'], {foreignKey : 'user_id'});
 db['Faq'].belongsTo(db['FaqCategory'], {foreignKey : 'faq_category_id'})
 db['ContactSupport'].belongsTo(db['ContactReason'], {foreignKey : 'contact_reason_id'})
 db['ContactSupport'].belongsTo(db['User'], {foreignKey : 'user_id'})
+
+
+
 
 // Start Message
 db['ChatGroup'].hasOne(db['ChatParticipant'], { foreignKey: 'chat_group_id', as: 'ChatParticipant' });
@@ -188,6 +189,7 @@ db['UserGameHistory'].belongsTo(db['Game'], { foreignKey: 'game_id',  as: "GameD
 
 //end leader board
 db["LinkGame"].hasOne(db["UserLinkGame"], { foreignKey: "link_game_id", as: "UserLinkGame"  });
+
 db['UserLinkGame'].belongsTo(db['LinkGame'], { foreignKey: 'link_game_id'});
 
 db['User'].hasOne(db['FriendRequest'], { foreignKey: 'to_user_id', as: 'requestTo' });

@@ -15,6 +15,7 @@ const setusettingRouter = require("./routes/setusetting.routes");
 const userRouter = require("./routes/user.routes");
 const bankallRouter = require("./routes/bankall.routes");
 const adminRouter = require("./routes/admin.routes");
+const gamesRouter = require("./routes/games.routes");
 
 
 
@@ -48,6 +49,7 @@ app.use("/api/v5/settingnoauth", setusettingRouter);
 app.use("/api/v5/user", userRouter);
 app.use("/api/v5/admin", adminRouter);
 app.use("/api/v5/bankall", bankallRouter);
+app.use("/api/v5/games", gamesRouter);
 
 
 

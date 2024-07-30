@@ -1,89 +1,332 @@
-// "use strict";
+var { Askmebet } = require("../models");
 
-// const Buffer = require("buffer").Buffer;
-// const path = require("path");
-// const fs = require("fs");
-// const jwt = require("jsonwebtoken");
-// const CONFIG = require("../config/config.json");
-// const APP = require("../config/app.json");
-// const Walllet = require("../apis/wallet.api");
-// const sgMail = require("@sendgrid/mail");
-// const {
-//   Adminlogin,
-//   VerificationOtp,
-//   Post,
-//   Follower,
-//   Friendship,
-//   Clan,
-//   ClanMember,
-//   Game,
-//   Team,
-//   BonusAmount,
-//   Game_c,
-//   Askmebet,
-//   Agent_ufa,
-//   NotificationMessage,
-// } = require("../models");
-// const { to, TE, ReE } = require("../services/util.service");
-// const { Op } = require("sequelize");
-// const walletHelper = require("./wallet.helper");
-// var moment = require("moment");
-// require("moment/locale/th");
+// create_userAgent
+const create_userAgent = async (item) => {
+  const axios = require("axios");
+  let data = JSON.stringify({
+    agentUsername: item.agentUsername,
+    key: item.key,
+    username: item.username,
+    name: item.name,
+    password: item.password,
+    web: item.web,
+  });
 
-// const Agent_Askmebets = require("../apiall/apiamb/agent_api");
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: `${item.domain}/ext/createUser/${item.prefix}/${item.agentUsername}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
 
-// const getdata_agent = async (type, user_id) => {
-//   const Askmebetzs = await Askmebet.findOne({    where: {
-//     status_run: 1,
-//   } 
-//   });
-//   // Askmebet.findOne({
-//   //   where: {
-//   //     status_run: 1,
-//   //   }
-//   // });
-//   //  console.log(Askmebetzs)
-  
-//   return Askmebetzs;
-// };
+  return axios.request(config);
+};
 
-// const chack_Credit_Agent = async function (req, res) {};
+// getProfileAndCredit
+const getProfileAndCredit = async (item) => {
+  const Askmebets = await Askmebet.findOne({
+    where: {
+      status_run: 1,
+    },
+  });
+  const axios = require("axios");
+  let data = JSON.stringify({
+    agentUsername: Askmebets.agent,
+    key: Askmebets.key_agent,
+    username: item.username,
+    web: Askmebets.Web,
+  });
 
-// const getdata_Get_Credit_Agent = async function (req, res) {
-//   const Askmebets = await Askmebet.findOne({
-//     where: {
-//       status_run: 1,
-//     },
-//   });
+  // console.log(Askmebets)
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: `${Askmebets.domain}/ext/getProfileAndCredit/${Askmebets.prefix}/${Askmebets.agent}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
 
-//   if (!Askmebets) {
-//     return { msg: "ไม่มีการเชื่อมต่อ Agent" };
-//   }
+  return axios.request(config);
+};
 
-//   let datap = {
-//     agentUsername: Askmebets.agent,
-//     key: Askmebets.key_agent,
-//     prefix: Askmebets.prefix,
-//     domain: Askmebets.domain,
+// getAgentCredit
+const getAgentCredit = async (item) => {
+  const Askmebets = await Askmebet.findOne({
+    where: {
+      status_run: 1,
+    },
+  });
+  const axios = require("axios");
+  let data = JSON.stringify({
+    agentUsername: Askmebets.agent,
+    key: Askmebets.key_agent,
+    web: Askmebets.Web,
+  });
 
-//     web: Askmebets.Web,
-//   };
+  console.log(Askmebets)
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: `${Askmebets.domain}/ext/getAgentCredit/${Askmebets.prefix}/${Askmebets.agent}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
 
-//   //console.log(datap);
+  return axios.request(config);
+};
 
-//   let dataaget = await Agent_Askmebets.Get_Credit_Agent(datap);
+//  providerPrefixList
+const providerPrefixList = async (item) => {
+  const Askmebets = await Askmebet.findOne({
+    where: {
+      status_run: 1,
+    },
+  });
+  const axios = require("axios");
+  let data = JSON.stringify({
+    agentUsername: Askmebets.agent,
+    key: Askmebets.key_agent,
+    web: Askmebets.Web,
+  });
 
-//   console.log(dataaget);
-//   //   //console.log(dataaget)
-//   // if (!dataaget) {
-//   //   return ReE(res, { msg: "ไม่มีการเชื่อมต่อ Agent" }, 200);
-//   // }
+  //console.log(Askmebets)
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: `${Askmebets.domain}/ext/providerPrefixList/${Askmebets.prefix}/${Askmebets.agent}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
 
-//   return dataaget;
-// };
+  return axios.request(config);
+};
 
-// module.exports = {
-//   getdata_agent,
-//   chack_Credit_Agent,
-//   getdata_Get_Credit_Agent,
-// };
+//  AddFavouritesGamesList
+const AddFavouritesGamesList = async (item) => {
+  const Askmebets = await Askmebet.findOne({
+    where: {
+      status_run: 1,
+    },
+  });
+  const axios = require("axios");
+  let data = JSON.stringify({
+    agentUsername: Askmebets.agent,
+    key: Askmebets.key_agent,
+    web: Askmebets.Web,
+    gameId: item.gameId,
+    username: item.username,
+  });
+
+  //console.log(Askmebets)
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: `${Askmebets.domain}/ext/addFavourites/${Askmebets.prefix}/${Askmebets.agent}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
+  return axios.request(config);
+};
+
+//  delFavourites
+const delFavourites = async (item) => {
+  const Askmebets = await Askmebet.findOne({
+    where: {
+      status_run: 1,
+    },
+  });
+  const axios = require("axios");
+  let data = JSON.stringify({
+    agentUsername: Askmebets.agent,
+    key: Askmebets.key_agent,
+    web: Askmebets.Web,
+    gameId: item.gameId,
+    username: item.username,
+  });
+
+  //console.log(Askmebets)
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: `${Askmebets.domain}/ext/delFavourites/${Askmebets.prefix}/${Askmebets.agent}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
+  return axios.request(config);
+};
+//  getFavourites
+const getFavourites = async (item) => {
+  const Askmebets = await Askmebet.findOne({
+    where: {
+      status_run: 1,
+    },
+  });
+  const axios = require("axios");
+  let data = JSON.stringify({
+    agentUsername: Askmebets.agent,
+    key: Askmebets.key_agent,
+    web: Askmebets.Web,
+    gameId: item.gameId,
+    username: item.username,
+  });
+
+  //console.log(Askmebets)
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: `${Askmebets.domain}/ext/getFavourites/${Askmebets.prefix}/${Askmebets.agent}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
+  return axios.request(config);
+};
+
+//  gameList
+const gameList = async (item) => {
+  const Askmebets = await Askmebet.findOne({
+    where: {
+      status_run: 1,
+    },
+  });
+  const axios = require("axios");
+  let data = JSON.stringify({
+    agentUsername: Askmebets.agent,
+    key: Askmebets.key_agent,
+    web: Askmebets.Web,
+    tab: item.tab,
+  });
+
+  //console.log(Askmebets)
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: `${Askmebets.domain}/ext/gameList/${Askmebets.prefix}/${Askmebets.agent}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
+  return axios.request(config);
+};
+
+//  getRecentlys เกมที่เล่นล่าสุด
+const getRecentlys = async (item) => {
+  const Askmebets = await Askmebet.findOne({
+    where: {
+      status_run: 1,
+    },
+  });
+  const axios = require("axios");
+  let data = JSON.stringify({
+    agentUsername: Askmebets.agent,
+    key: Askmebets.key_agent,
+    web: Askmebets.Web,
+    username: item.username,
+  });
+
+  //console.log(Askmebets)
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: `${Askmebets.domain}/ext/getRecently/${Askmebets.prefix}/${Askmebets.agent}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
+  return axios.request(config);
+};
+
+//  deposit
+const deposit = async (item) => {
+  const Askmebets = await Askmebet.findOne({
+    where: {
+      status_run: 1,
+    },
+  });
+  const axios = require("axios");
+  let data = JSON.stringify({
+    agentUsername: Askmebets.agent,
+    key: Askmebets.key_agent,
+    username: item.username,
+    balance: item.balance,
+    isDp: true,
+    web: Askmebets.Web,
+  });
+
+  //console.log(Askmebets)
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: `${Askmebets.domain}/ext/deposit/${Askmebets.prefix}/${Askmebets.agent}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
+  return axios.request(config);
+};
+
+//  withdrawal
+const withdrawal = async (item) => {
+  const Askmebets = await Askmebet.findOne({
+    where: {
+      status_run: 1,
+    },
+  });
+  const axios = require("axios");
+  let data = JSON.stringify({
+    agentUsername: Askmebets.agent,
+    key: Askmebets.key_agent,
+    username: item.username,
+    balance: item.balance,
+    web: Askmebets.Web,
+  });
+
+  //console.log(Askmebets)
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: `${Askmebets.domain}/ext/withdrawal/${Askmebets.prefix}/${Askmebets.agent}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
+  return axios.request(config);
+};
+module.exports = {
+  create_userAgent,
+  getProfileAndCredit,
+  getAgentCredit,
+  providerPrefixList,
+  AddFavouritesGamesList,
+  delFavourites,
+  getFavourites,
+  gameList,
+  getRecentlys,
+  deposit,
+  withdrawal
+};

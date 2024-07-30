@@ -15,8 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Transaction.init({
     user_id: {
-      type: DataTypes.STRING,
-      allowNull: true,
+      type: DataTypes.INTEGER,
+        allowNull: true,
+        references: { model: "member", key: "id" },
+        onDelete: "CASCADE",
     },
     match_id: {
       type: DataTypes.INTEGER,
@@ -101,12 +103,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: true
     },
+    addby: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     date_new1: {
       type: DataTypes.DATE,
       allowNull: true
     },
     
-  }, {
+  }, { 
     sequelize,
     modelName: 'Transaction',
     tableName: "transactions",
