@@ -1,6 +1,10 @@
 const express = require("express");
 const addminRouter = express.Router();
 const adminControllers = require("../controllers/admin/admin.controller");
+const ScbgenControllers = require("../controllers/bank/apiscb_den/games.controller");
+
+
+
 
 const passport = require("passport");
 const multer = require('multer');
@@ -23,6 +27,15 @@ addminRouter.get("/getAgentCredit", passport.authenticate("jwt", { session: fals
 addminRouter.get("/getTransactions", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getTransactions);
 addminRouter.post("/addcredit", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.addcredit);
 addminRouter.post("/delCredit", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.delCredit);
+
+
+
+
+
+// devie scb
+
+addminRouter.post("/gendevies", passport.authenticate("jwt", { session: false }), userMidd.checkUser, ScbgenControllers.gendatadevie_scb);
+addminRouter.post("/postallowadddevice", passport.authenticate("jwt", { session: false }), userMidd.checkUser, ScbgenControllers.allowadddevice);
 
 // 
 addminRouter.get("/getdatabank_code",  adminControllers.getdatabank_code);
