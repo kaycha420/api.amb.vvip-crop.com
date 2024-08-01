@@ -68,11 +68,11 @@ db["Member"].belongsTo(db["Bank"], { as: "Bank", foreignKey: "bank_id", });
 
 //db["Member"].hasOne(db["Transaction"], { foreignKey: "current_Tranid_id",});
 
-db['History_tran'].belongsTo(db['Account_bank'], {foreignKey : 'accnum_from'})
+db['History_tran'].belongsTo(db['Accountbanks'], {foreignKey : 'accnum_from'})
 
 
 
-db["Account_bank"].belongsTo(db["Bank"], { as: "Bank", foreignKey: "bank_id", });
+db["Accountbanks"].belongsTo(db["Bank"], { as: "Bank", foreignKey: "bank_id", });
 
 
 db["Transaction"].belongsTo(db["Member"], { as: "Member", foreignKey: "user_id", });
@@ -97,6 +97,8 @@ db['UserGameStatus'].belongsTo(db['Game'], {foreignKey : 'game_id'})
 
 // start team table associates
 db['Game'].hasMany(db['Team'], { foreignKey: 'game_id', as: 'team' });
+
+
 db['Team'].belongsTo(db['Game'], {foreignKey : 'game_id'})
 // end team table associates
 

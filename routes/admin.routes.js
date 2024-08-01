@@ -42,5 +42,8 @@ addminRouter.get("/getdatabank_code",  adminControllers.getdatabank_code);
 
 //addminRouter.get("/getAllAdmin",passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getAllAdmin);
 
+// SCB LOGIN
+
+
 module.exports = addminRouter;
 

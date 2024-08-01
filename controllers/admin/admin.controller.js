@@ -1,7 +1,7 @@
 var {
   Member,
   Admins,
-  Accountbank,
+  Accountbanks,
   Setting,
   Bank,
   Askmebet,
@@ -278,9 +278,8 @@ const getdata_memberall = async function (req, res) {
   });
 };
 
-async function getdata_transactions_byid(id,type){
-
- // console.log(id)
+async function getdata_transactions_byid(id, type) {
+  // console.log(id)
 
   let getdata = await Transaction.findAll({
     include: [
@@ -295,13 +294,13 @@ async function getdata_transactions_byid(id,type){
       },
     ],
     order: [["id", "DESC"]],
-    where : {
-      user_id:id,
-      type_option:type
-    }
+    where: {
+      user_id: id,
+      type_option: type,
+    },
   });
 
-  return  getdata
+  return getdata;
 }
 // getdamember_detail
 const getdamember_detail = async function (req, res) {
@@ -336,16 +335,20 @@ const getdamember_detail = async function (req, res) {
     username: dataagent.user_agent,
   };
 
-  let resd,transactions_deprosit_byid,transactions_wit_byid;
+  let resd, transactions_deprosit_byid, transactions_wit_byid;
 
   [err, resd] = await to(Agent_Askmebets.getProfileAndCredit(datap));
 
-  [err, transactions_deprosit_byid] = await to(getdata_transactions_byid(body.id,"ฝาก"));
-  [err, transactions_wit_byid] = await to(getdata_transactions_byid(body.id,"ถอน"));
+  [err, transactions_deprosit_byid] = await to(
+    getdata_transactions_byid(body.id, "ฝาก")
+  );
+  [err, transactions_wit_byid] = await to(
+    getdata_transactions_byid(body.id, "ถอน")
+  );
 
   //let resd = await;
   let item = resd?.data;
-  
+
   // console.log(err, resd?.data);
 
   let xxx = {
@@ -376,7 +379,7 @@ const add_bankdeposit = async function (req, res) {
     name_bank: body.name_bank,
   };
 
-  let datasave = await Accountbank.create(datas);
+  let datasave = await Accountbanks.create(datas);
   return ReS(res, {
     error: "No error",
     msg: "เพิ่มบัญชีธนาคารสำเร็จ",
@@ -386,11 +389,56 @@ const add_bankdeposit = async function (req, res) {
 //getdata_bankdeposit
 const getdata_bankdeposit = async function (req, res) {
   const body = req.body;
-  let data = await Accountbank.findAll();
-  console.log(body);
+  let err, Data_Accountbanks;
+
+  [err, Data_Accountbanks] = await to(
+    Accountbanks.findAll({
+      include: [
+        {
+          as: "Bank",
+          model: Bank,
+          attributes: {
+            include: [],
+            exclude: ["deleted_at", "created_at", "updated_at"],
+          },
+          required: true,
+        },
+      ],
+      attributes: [
+        "id",
+        "accnum",
+        "name_accnum",
+        "status_scb",
+        "from_b",
+        "bank_id",
+        "setting_id",
+        "level",
+        "option_b",
+        "time_crul",
+        "tobank_accnum",
+        "tobank_monney",
+        "status",
+        "text_data",
+        "limit_wit",
+        "limit_d",
+        "tobank_bank",
+        "tobank_minmonny",
+        "tobank_stust",
+        "baba",
+        "status_connact",
+        "from_accnum",
+        "name_bank",
+        "autowit_status",
+        "autowit_minmony",
+        "status_run",
+      ],
+    })
+  );
+
+  // console.log(err);
   return ReS(res, {
     error: "No error",
-    data: data,
+    data: Data_Accountbanks,
     msg: "Success",
   });
 };
@@ -615,8 +663,7 @@ const addcredit = async function (req, res) {
   }
   let data2 = resd.data;
 
-  let create_to = await Transaction.create(
-    {
+  let create_to = await Transaction.create({
     user_id: body.user_id,
     amount: body.credit,
     ref: data2.data.refId,
@@ -625,12 +672,8 @@ const addcredit = async function (req, res) {
     status: "success",
     type_option: "ฝาก",
     addby: req.user.username,
-    add_from: 'admin'
-  }
-
-);
-
-
+    add_from: "admin",
+  });
 
   return ReS(res, {
     data: create_to,
@@ -704,7 +747,7 @@ const getTransactions = async function (req, res) {
   });
 };
 //checkloginadmin
-const chacklogin = async function (req, res) { 
+const chacklogin = async function (req, res) {
   if (req.user) {
     return ReS(res, {
       code: 0,
@@ -713,7 +756,7 @@ const chacklogin = async function (req, res) {
       msg: "Success",
     });
   }
-}
+};
 function randomString(len, charSet) {
   charSet = charSet || "abcdefghijklmnopqrstuvwxyz0123456789";
   var randomString = "";
@@ -741,5 +784,5 @@ module.exports = {
   addcredit,
   delCredit,
   getTransactions,
-  chacklogin
+  chacklogin,
 };
