@@ -432,10 +432,19 @@ const getdata_bankdeposit = async function (req, res) {
         "autowit_minmony",
         "status_run",
       ],
+
+      where: {
+        status_run: 1,
+        status_connact: 1,
+        status_scb: 1,
+      },
     })
   );
 
-  // console.log(err);
+  if (Data_Accountbanks.length == 0) {
+    return ReE(res, { message: "No data found" }, 200);
+  }
+
   return ReS(res, {
     error: "No error",
     data: Data_Accountbanks,
@@ -767,6 +776,61 @@ function randomString(len, charSet) {
   return randomString;
 }
 
+const setgetdata_bankAll = async function (req, res) {
+  let err, Data_Accountbanks;
+
+  [err, Data_Accountbanks] = await to(
+    Accountbanks.findAll({
+      include: [
+        {
+          as: "Bank",
+          model: Bank,
+          attributes: {
+            include: [],
+            exclude: ["deleted_at", "created_at", "updated_at"],
+          },
+          required: true,
+        },
+      ],
+      attributes: [
+        "id",
+        "accnum",
+        "name_accnum",
+        "status_scb",
+        "from_b",
+        "bank_id",
+        "setting_id",
+        "level",
+        "option_b",
+        "time_crul",
+        "tobank_accnum",
+        "tobank_monney",
+        "status",
+        "text_data",
+        "limit_wit",
+        "limit_d",
+        "tobank_bank",
+        "tobank_minmonny",
+        "tobank_stust",
+        "baba",
+        "status_connact",
+        "from_accnum",
+        "name_bank",
+        "autowit_status",
+        "autowit_minmony",
+        "status_run",
+      ],
+    })
+  );
+
+  // console.log(err);
+  return ReS(res, {
+    error: "No error",
+    data: Data_Accountbanks,
+    msg: "Success",
+  });
+};
+
 module.exports = {
   cerate_useradmin,
   loginadmin,
@@ -785,4 +849,5 @@ module.exports = {
   delCredit,
   getTransactions,
   chacklogin,
+  setgetdata_bankAll,
 };

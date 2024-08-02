@@ -27,6 +27,7 @@ addminRouter.get("/getAgentCredit", passport.authenticate("jwt", { session: fals
 addminRouter.get("/getTransactions", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getTransactions);
 addminRouter.post("/addcredit", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.addcredit);
 addminRouter.post("/delCredit", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.delCredit);
+addminRouter.get("/getdata_bankAll", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.setgetdata_bankAll);
 
 
 

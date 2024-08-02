@@ -19,6 +19,10 @@ const Agent_Askmebets = require("../../../helpers/agent.helper.js");
 const app = require("../../../services/app.service");
 const config = require("../../../config/app.json")[app["env"]];
 const Notification = require("../../../helpers/notification.helper.js");
+
+const urlendpoint = "http://servermax.3bbddns.com:1337";
+
+
 var moment = require("moment");
 require("moment/locale/th");
 
@@ -32,7 +36,7 @@ async function genpin_step1(item) {
   let config = {
     method: "post",
     maxBodyLength: Infinity,
-    url: "http://192.168.1.180:1337/genpin_step1",
+    url: urlendpoint+"/genpin_step1",
     headers: {
       "Content-Type": "application/json",
     },
