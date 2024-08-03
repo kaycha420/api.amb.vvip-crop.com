@@ -2,10 +2,12 @@ var { Askmebet } = require("../models");
 
 //  withdrawal
 const chack_deviebank_bybankfrom = async (item) => {
+
+  
   const axios = require("axios");
   let data = JSON.stringify({
-    username: item.deviceId,
-    password: item.pin,
+    deviceId: item.deviceId,
+    pin: item.pin,
   });
 
   let dataauth = await getDatakey()
