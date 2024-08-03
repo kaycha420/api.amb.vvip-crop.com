@@ -364,10 +364,33 @@ const getdamember_detail = async function (req, res) {
   });
 };
 
+
+
+const add_bankdeposit_chackconnect = async function (req, res) {
+
+  const body = req.body;
+
+
+
+};
+
 //add_bankdeposit
 const add_bankdeposit = async function (req, res) {
   const body = req.body;
   //console.log(body)
+
+  let err, data_bank;
+
+  [err, data_bank] = await to(
+    Bank.findOne({
+      where: {
+        bank_id: body.from_b,
+      },
+    })
+  );
+
+
+  
   const datas = {
     accnum: body.accnum,
     name_accnum: body.name_accnum,
@@ -850,4 +873,5 @@ module.exports = {
   getTransactions,
   chacklogin,
   setgetdata_bankAll,
+  add_bankdeposit_chackconnect
 };

@@ -2,6 +2,7 @@ const express = require("express");
 const addminRouter = express.Router();
 const adminControllers = require("../controllers/admin/admin.controller");
 const ScbgenControllers = require("../controllers/bank/apiscb_den/games.controller");
+const Scbclass_Controllers = require("../controllers/bank/apiscb_deposit/Apiscbdeposit.controller");
 
 
 
@@ -37,6 +38,15 @@ addminRouter.get("/getdata_bankAll", passport.authenticate("jwt", { session: fal
 
 addminRouter.post("/gendevies", passport.authenticate("jwt", { session: false }), userMidd.checkUser, ScbgenControllers.gendatadevie_scb);
 addminRouter.post("/postallowadddevice", passport.authenticate("jwt", { session: false }), userMidd.checkUser, ScbgenControllers.allowadddevice);
+
+
+addminRouter.post("/chack_connect_login_auth_bank", passport.authenticate("jwt", { session: false }), userMidd.checkUser, Scbclass_Controllers.login_auth);
+
+
+
+
+
+
 
 // 
 addminRouter.get("/getdatabank_code",  adminControllers.getdatabank_code);
