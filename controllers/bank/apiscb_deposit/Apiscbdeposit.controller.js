@@ -10,27 +10,11 @@ const { to, ReE, ReS, TE } = require("../../../services/util.service");
 const app = require("../../../services/app.service");
 const config = require("../../../config/app.json")[app["env"]];
 const Notification = require("../../../helpers/notification.helper.js");
+const Apiscb_helper = require("../../../helpers/Apiscb.helper.js");
+
+
 
 const urlendpoint = "http://servermax.3bbddns.com:1337";
-
-async function getDatakey() {
-  const axios = require("axios");
-  let data = JSON.stringify({
-    Apikey: "1f1kiaaw6oseckqqmr1t",
-  });
-
-  let config = {
-    method: "post",
-    maxBodyLength: Infinity,
-    url: "http://servermax.3bbddns.com:1337/api/v10/scb/getTokenApi",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: data,
-  };
-
-  return await axios.request(config);
-}
 
 async function logInScbv1(params) {
   let datakey = await getDatakey();
@@ -59,6 +43,30 @@ async function login_authv1(params) {
 
   return getdatalogin.data;
 }
+
+const add_bankdeposit_chackconnect = async function (req, res) {
+
+
+
+  let body = req.body
+
+  const bodypost = {
+    pin: body.password,
+    deviceId: body.username,
+  };
+
+  let err, user, errs;
+
+  [err, user] = await to(Apiscb_helper.chack_deviebank_bybankfrom(bodypost));
+
+
+  console.log(err)
+  console.log(user)
+
+
+
+  
+};
 
 const login_auth = async function (req, res) {
   let databank = await Accountbanks.findOne({
@@ -97,5 +105,6 @@ const login_auth = async function (req, res) {
 
 module.exports = {
   login_auth,
+  add_bankdeposit_chackconnect,
   // allowadddevice,
 };

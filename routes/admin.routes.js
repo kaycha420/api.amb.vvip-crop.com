@@ -43,6 +43,7 @@ addminRouter.post("/postallowadddevice", passport.authenticate("jwt", { session:
 addminRouter.post("/chack_connect_login_auth_bank", passport.authenticate("jwt", { session: false }), userMidd.checkUser, Scbclass_Controllers.login_auth);
 
 
+addminRouter.post("/add_bankdeposit_chackconnect", passport.authenticate("jwt", { session: false }), userMidd.checkUser, Scbclass_Controllers.add_bankdeposit_chackconnect);
 
 
 
