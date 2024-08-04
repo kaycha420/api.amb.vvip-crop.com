@@ -1,4 +1,4 @@
-var { Member } = require("../../models");
+var { Member, Accountbanks, Bank } = require("../../models");
 //const Api_bet = require("../../apiall/apibetfix/apibetfix");
 //const ApiNotify = require("../../apis/notify.api");
 const { to, ReE, ReS, TE } = require("../../services/util.service");
@@ -384,7 +384,6 @@ const create_register = async function (req, res) {
 const loginmember = async function (req, res) {
   const body = req.body;
   const now = new Date();
- 
 
   //console.log(users)
   let err, users, errs;
@@ -462,8 +461,49 @@ const loginmember = async function (req, res) {
       });
     }
   }
- // console.log(ee);
+  // console.log(ee);
 }; // END login member
+
+//
+const getdataUser = async function (req, res) {
+  let body = req.body;
+  let data = await Member.findOne({
+    where:{
+      username: body.username
+    }
+  })
+  let acc = await Accountbanks.findOne({
+    where:{
+      option_b: "ฝาก"
+    }
+  })
+  let databank = await Bank.findOne({
+    where:{
+      id: data.bank
+    }
+  })
+  //console.log(bank);
+  let datauser = {
+    bank: databank,
+    username: data.username,
+    name: data.name,
+    accnum: data.accnum,
+    user_agent: data.user_agent,
+    id: data.id,
+    webAccountbank_deposit:{
+      accnum: acc.accnum,
+      name_accnum: acc.name_accnum,
+      from_b: acc.from_b,
+      bank_id: acc.bank_id,
+      option_b: acc.option_b,
+    }
+  };
+  return ReS(res, {
+    user: datauser,
+    message: "Success",
+  });
+  // console.log(bank);
+};
 function randomString(len, charSet) {
   charSet = charSet || "abcdefghijklmnopqrstuvwxyz0123456789";
   var randomString = "";
@@ -478,4 +518,5 @@ module.exports = {
   register,
   create_register,
   loginmember,
+  getdataUser,
 };

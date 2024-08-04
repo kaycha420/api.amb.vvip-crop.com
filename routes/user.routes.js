@@ -13,5 +13,6 @@ require("../middleware/passport_admin")(passport);
 //สมัครสมาชิก (user)
 userRouter.post("/register", userControllers.register);
 userRouter.post("/loginmember", userControllers.loginmember);
+userRouter.post("/getdataUser",passport.authenticate("jwt", { session: false }), userMidd.checkUser, userControllers.getdataUser);
 
 module.exports = userRouter;
