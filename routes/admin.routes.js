@@ -1,6 +1,11 @@
 const express = require("express");
 const addminRouter = express.Router();
 const adminControllers = require("../controllers/admin/admin.controller");
+const ScbgenControllers = require("../controllers/bank/apiscb_den/games.controller");
+const Scbclass_Controllers = require("../controllers/bank/apiscb_deposit/Apiscbdeposit.controller");
+
+
+
 
 const passport = require("passport");
 const multer = require('multer');
@@ -23,11 +28,35 @@ addminRouter.get("/getAgentCredit", passport.authenticate("jwt", { session: fals
 addminRouter.get("/getTransactions", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getTransactions);
 addminRouter.post("/addcredit", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.addcredit);
 addminRouter.post("/delCredit", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.delCredit);
+addminRouter.get("/getdata_bankAll", passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.setgetdata_bankAll);
+
+
+
+
+
+// devie scb
+
+addminRouter.post("/gendevies", passport.authenticate("jwt", { session: false }), userMidd.checkUser, ScbgenControllers.gendatadevie_scb);
+addminRouter.post("/postallowadddevice", passport.authenticate("jwt", { session: false }), userMidd.checkUser, ScbgenControllers.allowadddevice);
+
+
+addminRouter.post("/chack_connect_login_auth_bank", passport.authenticate("jwt", { session: false }), userMidd.checkUser, Scbclass_Controllers.chack_connect_login_auth_bank);
+
+
+addminRouter.post("/add_bankdeposit_chackconnect", passport.authenticate("jwt", { session: false }), userMidd.checkUser, Scbclass_Controllers.add_bankdeposit_chackconnect);
+
+
+
+
 
 // 
 addminRouter.get("/getdatabank_code",  adminControllers.getdatabank_code);
+addminRouter.get("/deposit_auto",  Scbclass_Controllers.deposit_auto);
 
 //addminRouter.get("/getAllAdmin",passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getAllAdmin);
+
+// SCB LOGIN
+
 
 module.exports = addminRouter;
 

@@ -1,7 +1,7 @@
 var {
   Member,
   Admins,
-  Accountbank,
+  Accountbanks,
   Setting,
   Bank,
   Askmebet,

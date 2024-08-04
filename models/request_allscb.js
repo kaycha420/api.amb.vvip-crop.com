@@ -67,23 +67,12 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true
         },
-        deleted_at: {
-            type: DataTypes.DATE,
-            allowNull: true
-        },
-        updated_at: {
-            type: DataTypes.DATE,
-            allowNull: true
-        },
-        created_at: {
-            type: DataTypes.DATE,
-            allowNull: true
-        },
+        
     }, {
         sequelize,
         modelName: 'Request_allscb',
         tableName: 'request_allscb',
-        // deletedAt: 'deleted_at',
+         deletedAt: 'deleted_at',
          createdAt: "created_at",
          updatedAt: "updated_at",
         // paranoid: true, //use for soft delete with using deleted_at

@@ -259,6 +259,8 @@ const getRecentlys = async (item) => {
 
 //  deposit
 const deposit = async (item) => {
+
+  
   const Askmebets = await Askmebet.findOne({
     where: {
       status_run: 1,

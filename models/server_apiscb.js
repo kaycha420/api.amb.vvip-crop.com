@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Server_apiscb extends Model {
     /**
@@ -13,51 +11,39 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Server_apiscb.init({
-    roue_server: {
-        type: DataTypes.TEXT,
-        allowNull: true
-      },
-      name_server: {
+  Server_apiscb.init(
+    {
+      
+      auth: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
       },
       devie: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
       },
       pin: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
       },
       accnum: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
       },
       status_server: {
         type: DataTypes.INTEGER,
-        allowNull: true
-      },
-      deleted_at: {
-        type: DataTypes.DATE,
         allowNull: true,
       },
-      created_at: {
-        allowNull: true,
-        type: DataTypes.DATE
-      },
-      updated_at: {
-        allowNull: true,
-        type: DataTypes.DATE
-      },
-  }, {
-    sequelize,
-    modelName: 'Server_apiscb',
-    tableName: 'server_apiscb',
-    createdAt: 'created_at',
-    updatedAt: 'updated_at',
     
-
-  });
+    },
+    {
+      sequelize,
+      modelName: "Server_apiscb",
+      tableName: "server_apiscb",
+      deletedAt: 'deleted_at',
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    }
+  );
   return Server_apiscb;
 };
