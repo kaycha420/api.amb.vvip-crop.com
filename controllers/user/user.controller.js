@@ -449,7 +449,7 @@ const loginmember = async function (req, res) {
         name: ruser.name,
         accnum: ruser.accnum,
         user_agent: ruser.user_agent,
-        id: ruser.user_id,
+        id: ruser.id,
         token: ruser.token,
       };
       let user_id = users.id;
