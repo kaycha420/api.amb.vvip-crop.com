@@ -40,7 +40,7 @@ addminRouter.post("/gendevies", passport.authenticate("jwt", { session: false })
 addminRouter.post("/postallowadddevice", passport.authenticate("jwt", { session: false }), userMidd.checkUser, ScbgenControllers.allowadddevice);
 
 
-addminRouter.post("/chack_connect_login_auth_bank", passport.authenticate("jwt", { session: false }), userMidd.checkUser, Scbclass_Controllers.login_auth);
+addminRouter.post("/chack_connect_login_auth_bank", passport.authenticate("jwt", { session: false }), userMidd.checkUser, Scbclass_Controllers.chack_connect_login_auth_bank);
 
 
 addminRouter.post("/add_bankdeposit_chackconnect", passport.authenticate("jwt", { session: false }), userMidd.checkUser, Scbclass_Controllers.add_bankdeposit_chackconnect);
@@ -51,6 +51,7 @@ addminRouter.post("/add_bankdeposit_chackconnect", passport.authenticate("jwt", 
 
 // 
 addminRouter.get("/getdatabank_code",  adminControllers.getdatabank_code);
+addminRouter.get("/deposit_auto",  Scbclass_Controllers.deposit_auto);
 
 //addminRouter.get("/getAllAdmin",passport.authenticate("jwt", { session: false }), userMidd.checkUser, adminControllers.getAllAdmin);
 

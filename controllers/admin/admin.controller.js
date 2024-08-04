@@ -364,14 +364,8 @@ const getdamember_detail = async function (req, res) {
   });
 };
 
-
-
 const add_bankdeposit_chackconnect = async function (req, res) {
-
   const body = req.body;
-
-
-
 };
 
 //add_bankdeposit
@@ -389,14 +383,27 @@ const add_bankdeposit = async function (req, res) {
     })
   );
 
+  let Accountbankss = await Accountbanks.findOne({
+    where: {
+      accnum: body.accnum,
+      option_b: body.option_b
+    },
+  });
 
-  
+  if (Accountbankss) {
+    return ReE(res, {
+      error: "No error",
+      msg: "มีเลขบัญชี นี้แล้ว ",
+    });
+  }
+
   const datas = {
     accnum: body.accnum,
     name_accnum: body.name_accnum,
     username: body.username,
     password: body.password,
     from_b: body.from_b,
+    bank_id: data_bank.id,
     option_b: body.option_b,
     level: body.level,
     name_bank: body.name_bank,
@@ -873,5 +880,5 @@ module.exports = {
   getTransactions,
   chacklogin,
   setgetdata_bankAll,
-  add_bankdeposit_chackconnect
+  add_bankdeposit_chackconnect,
 };
