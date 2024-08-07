@@ -9,7 +9,7 @@ const userMidd = require("../middleware/app.user");
 require("../middleware/passport_admin")(passport);
 
 // games
-gamesRouter.get("/providerPrefixLists", passport.authenticate("jwt", { session: false }), userMidd.checkUser, gamesControllers.providerPrefixLists);
+gamesRouter.get("/providerPrefixLists",  gamesControllers.providerPrefixLists);
 gamesRouter.post("/AddFavouritesGamesList", passport.authenticate("jwt", { session: false }), userMidd.checkUser, gamesControllers.AddFavouritesGamesLists);
 gamesRouter.post("/delFavourite", passport.authenticate("jwt", { session: false }), userMidd.checkUser, gamesControllers.delFavourite);
 gamesRouter.get("/getFavourites", passport.authenticate("jwt", { session: false }), userMidd.checkUser, gamesControllers.getFavourite);
