@@ -20,7 +20,7 @@ const app = require("../../../services/app.service");
 const config = require("../../../config/app.json")[app["env"]];
 const Notification = require("../../../helpers/notification.helper.js");
 
-const urlendpoint = "http://servermax.3bbddns.com:1337";
+const urlendpoint = "http://192.168.1.180:1337";
 
 
 var moment = require("moment");

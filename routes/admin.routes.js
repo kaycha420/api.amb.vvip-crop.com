@@ -3,6 +3,7 @@ const addminRouter = express.Router();
 const adminControllers = require("../controllers/admin/admin.controller");
 const ScbgenControllers = require("../controllers/bank/apiscb_den/games.controller");
 const Scbclass_Controllers = require("../controllers/bank/apiscb_deposit/Apiscbdeposit.controller");
+const Datadaily_deposits_Controllers = require("../controllers/bank/databank/databank.controller");
 
 
 
@@ -45,6 +46,7 @@ addminRouter.post("/chack_connect_login_auth_bank", passport.authenticate("jwt",
 
 addminRouter.post("/add_bankdeposit_chackconnect", passport.authenticate("jwt", { session: false }), userMidd.checkUser, Scbclass_Controllers.add_bankdeposit_chackconnect);
 
+addminRouter.get("/getdadaily_deposits", passport.authenticate("jwt", { session: false }), userMidd.checkUser, Datadaily_deposits_Controllers.getdadaily_deposits);
 
 
 

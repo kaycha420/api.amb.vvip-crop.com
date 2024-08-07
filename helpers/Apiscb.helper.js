@@ -13,7 +13,7 @@ const chack_deviebank_bybankfrom = async (item) => {
   let config = {
     method: "post",
     maxBodyLength: Infinity,
-    url: "http://servermax.3bbddns.com:1337/api/v10/scb/chack_preloadandresumecheck",
+    url: "http://192.168.1.180:1337/api/v10/scb/chack_preloadandresumecheck",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${dataauth.data.data.token}`,
@@ -33,7 +33,7 @@ const getDatakey = async () => {
   let config = {
     method: "post",
     maxBodyLength: Infinity,
-    url: "http://servermax.3bbddns.com:1337/api/v10/scb/getTokenApi",
+    url: "http://192.168.1.180:1337/api/v10/scb/getTokenApi",
     headers: {
       "Content-Type": "application/json",
     },
@@ -53,7 +53,7 @@ const chackloginauth = async (props) => {
   let config = {
     method: "post",
     maxBodyLength: Infinity,
-    url: "http://servermax.3bbddns.com:1337/api/v10/scb/chackloginauth",
+    url: "http://192.168.1.180:1337/api/v10/scb/chackloginauth",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${dataauth.data.data.token}`,
@@ -78,7 +78,7 @@ const chacktranhit = async (props) => {
   let config = {
     method: "post",
     maxBodyLength: Infinity,
-    url: "http://servermax.3bbddns.com:1337/api/v10/scb/chack_history",
+    url: "http://192.168.1.180:1337/api/v10/scb/chack_history",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${dataauth.data.data.token}`,

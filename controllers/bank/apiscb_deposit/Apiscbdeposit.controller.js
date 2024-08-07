@@ -15,7 +15,7 @@ const Notification = require("../../../helpers/notification.helper.js");
 const Apiscb_helper = require("../../../helpers/Apiscb.helper.js");
 const deposit_helper = require("../../../helpers/deposit_new.helper.js");
 var md5 = require("md5");
-const urlendpoint = "http://servermax.3bbddns.com:1337";
+const urlendpoint = "http://192.168.1.180:1337";
 var moment = require("moment");
 
 async function logInScbv1(params) {
