@@ -92,7 +92,7 @@ const chack_connect_login_auth_bank = async function (req, res) {
   let err, user, errs, users;
   [err, user] = await to(login_authv1(bodypost));
 
-  // console.log(user.data)
+  console.log(user)
   if (err) {
     return ReE(res, {
       error: "Server error",

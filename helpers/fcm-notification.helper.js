@@ -1,21 +1,17 @@
-const FCM = require("../apis/fcm.api");
 const app = require('../services/app.service');
-const config = require(__dirname + '/../config/app.json')[app['env']];
+const config = require('../config/app.json')[app['env']];
+const io = require("socket.io-client");
+var socket = io.connect(config["BASE_URL"], { reconnect: true });
 
-const sendNotification = async function (data, tokens) {
 
-    var notificationData = JSON.stringify({
-        notification: data,
-        registration_ids: tokens
-    });
+const sendNotification = async function (data) {
 
-    return FCM.sendPushNotification(notificationData)
-        .then(function (response) {
-            return true
-        })
-        .catch(function (error) {
-            return false
-        });
+    let datanoti = await NotificationMessage.create(data);
+
+    socket.emit("sendNotification", datanoti)
+
+    return datanoti
+
 }
 
 module.exports = {

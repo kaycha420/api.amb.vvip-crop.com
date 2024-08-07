@@ -76,3 +76,25 @@ const PORT = process.env.PORT || config["port"];
 let server = app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+const io = socketIo(server, {
+  cors: {
+    // origin: "http://localhost:3000",
+    origin: [config["req_base_url"], config["web_front_req_base_url"]],
+    methods: ["GET", "POST"],
+  },
+});
+
+
+io.on("connection", (socket) => {
+
+ 
+  socket.on("sendNotification", async (data) => {
+
+
+    console.log(data)
+    socket.to(data.lobby_room_id).emit("get_game_result", data);
+  });
+
+  
+});
